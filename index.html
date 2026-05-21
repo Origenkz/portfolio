@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Задачи — Минимал</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header>
+      <button id="mobileMenuBtn" class="mobile-menu-btn" aria-label="Меню">☰</button>
+      <div class="header-title-group">
+        <h1>Задачи</h1>
+        <div id="activeListLabel" class="active-list-label"></div>
+      </div>
+      <div class="controls">
+        <select id="listSelect" title="Список задач"></select>
+        <button id="newListBtn">Новый список</button>
+        <button id="deleteListBtn" class="danger">Удалить список</button>
+        <select id="sortSelect" title="Сортировка">
+          <option value="custom">По своему порядку</option>
+          <option value="date">По дате создания</option>
+          <option value="title">По названию</option>
+        </select>
+        <button id="newTaskBtn">Новая задача</button>
+        <button id="settingsBtn">Настройки</button>
+      </div>
+    </header>
+
+    <div id="mobileDrawer" class="mobile-drawer hidden" aria-hidden="true">
+      <div class="mobile-drawer-overlay" id="mobileDrawerOverlay"></div>
+      <aside class="mobile-drawer-panel">
+        <div class="mobile-drawer-header">
+          <h2>Списки</h2>
+          <button id="mobileDrawerClose" aria-label="Закрыть">✕</button>
+        </div>
+        <div class="mobile-drawer-body">
+          <button id="mobileNewListBtn" class="mobile-drawer-action">Новый список</button>
+          <ul id="mobileListMenu" class="mobile-list-menu"></ul>
+        </div>
+        <div class="mobile-drawer-footer">
+          <label>Сортировка
+            <select id="mobileSortSelect">
+              <option value="custom">По своему порядку</option>
+              <option value="date">По дате создания</option>
+              <option value="title">По названию</option>
+            </select>
+          </label>
+          <button id="mobileSettingsBtn" class="mobile-drawer-action">Настройки</button>
+        </div>
+      </aside>
+    </div>
+
+    <main>
+      <section id="list"></section>
+    </main>
+
+    <div id="editor" class="modal hidden">
+      <form id="taskForm" class="editor">
+        <h2 id="editorTitle">Новая задача</h2>
+        <label>Заголовок<input name="title" required/></label>
+        <label>Описание<textarea name="desc"></textarea></label>
+        <label>Срок<input type="datetime-local" name="deadline"/></label>
+        <label>Уведомление<input type="datetime-local" name="notify"/></label>
+        <label>Фото<input type="file" accept="image/*" name="photo"/></label>
+        <div class="photoPreview" id="photoPreview"></div>
+        <div class="actions">
+          <button type="submit">Сохранить</button>
+          <button type="button" id="cancelBtn">Отмена</button>
+          <button type="button" id="deleteBtn" class="danger hidden">Удалить</button>
+        </div>
+      </form>
+    </div>
+
+    <div id="listTypeModal" class="modal hidden">
+      <form id="listTypeForm" class="editor">
+        <h2>Создать список</h2>
+        <label>Название
+          <input type="text" id="newListName" required />
+        </label>
+        <label>Тип списка
+          <select id="newListType">
+            <option value="regular">Обычный (свободная сортировка)</option>
+            <option value="chain">Цепочный (последовательно)</option>
+          </select>
+        </label>
+        <div class="actions">
+          <button type="submit">Создать</button>
+          <button type="button" id="cancelNewList">Отмена</button>
+        </div>
+      </form>
+    </div>
+
+    <div id="settingsModal" class="modal hidden">
+      <form id="settingsForm" class="editor">
+        <h2>Настройки</h2>
+        <label>Тема
+          <select name="theme">
+            <option value="light">Светлая</option>
+            <option value="dark">Тёмная</option>
+            <option value="system">Системная</option>
+          </select>
+        </label>
+        <label>Размер интерфейса
+          <select name="size">
+            <option value="small">Маленький</option>
+            <option value="standard">Стандартный</option>
+            <option value="large">Большой</option>
+          </select>
+        </label>
+        <label>Язык
+          <select name="lang" id="langSelect">
+            <option value="ru">Русский</option>
+            <option value="en">English</option>
+            <option value="kk">Қазақша</option>
+          </select>
+        </label>
+        <div class="actions">
+          <button type="submit">Сохранить</button>
+          <button type="button" id="closeSettings">Закрыть</button>
+        </div>
+      </form>
+    </div>
+
+    <div id="notifModal" class="modal hidden">
+      <div class="notif">
+        <h3 id="notifTitle">Напоминание</h3>
+        <p id="notifText"></p>
+        <div class="actions">
+          <button id="markDone">Выполнено</button>
+          <button id="snooze">Отложить 10 мин</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
